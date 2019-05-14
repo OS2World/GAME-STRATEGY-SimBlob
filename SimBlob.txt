@@ -1,0 +1,49 @@
+        _______________
+ ______/ SimBlob Notes \__________________________________________________
+|                                                                         |
+|  SimBlob is a game under development by Amit Patel in his spare time.   |
+|  For information and updates, please see the web site:                  |
+|                                                                         |
+|      http://www-cs-students.stanford.edu/~amitp/games.html              |
+|                                                                         |
+|  This demo is not intended to be fully `playable' but you may find it   |
+|  enjoyable anyway.                                                      |
+|      - Amit (amitp@cs.stanford.edu)                                     |
+|                                                                         |
+| NOTE:                                                                   |
+|  By default, SimBlob uses GpiDrawBits to draw to the screen.  This      |
+|  drawing routine does not work on all systems (notably with ATI video   |
+|  drivers), so you may need to use an alternate drawing method.  The     |
+|  alternate drawing methods are selected with a command line parameter:  |
+|                                                                         |
+|  SIMBLOB ALTBITMAP                                                      |
+|        uses WinDrawBitmap, which is slower but works on most (all?)     |
+|        video drivers                                                    |
+|  SIMBLOB DIVE                                                           |
+|        uses DIVE, which is sometimes faster but sometimes slower,       |
+|        because DIVE always draws the entire window to the screen,       |
+|        even if only a tiny part needs to be drawn                       |
+|  SIMBLOB HYBRID                                                         |
+|        uses a hybrid of DIVE and GpiDrawBits.  Each time something      |
+|        needs to be drawn, SimBlob will try to determine which method    |
+|        is faster, and use that.  Small areas are generally drawn with   |
+|        PM and large areas are generally drawn with DIVE.                |
+|                                                                         |
+|        Unfortunately, this method may not work well if you are using    |
+|        16-bit color.  I have not tried it with 24-bit color yet.        |
+|_________________________________________________________________________|
+| Note about the fonts:                                                   |
+|                                                                         |
+| I am using Hershey fonts.  The Hershey Fonts were originally created    |
+| by Dr. A. V. Hershey while working at the U. S. National Bureau of      |
+| Standards, and they are free for use in commercial products, as long    |
+| as they are not converted into the U.S. NTIS's font format.             |
+|                                                                         |
+|	- The format of the Font data in this distribution                |
+|		was originally created by                                 |
+|			James Hurt                                        |
+|			Cognition, Inc.                                   |
+|			900 Technology Park Drive                         |
+|			Billerica, MA 01821                               |
+|			(mit-eddie!ci-dandelion!hurt)                     |
+|_________________________________________________________________________|

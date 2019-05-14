@@ -1,0 +1,11 @@
+e:\emx\lib\crt0.obj bitmaps.obj blitter.obj bmpformat.obj bufferwin.obj +
+control.obj figment.obj gamewin.obj gameinit.obj glyph.obj glyphlib.obj images.obj +
+initbitmaps.obj initmap.obj layer.obj layout.obj mainwin.obj map.obj +
+menu.obj military.obj notion.obj paint.obj palette.obj path.obj +
+rgbtable.obj simblob.obj simulate.obj sprites.obj statusbar.obj +
+textglyph.obj terrain.obj tools.obj unit.obj view.obj viewwin.obj +
+mapcmd.obj ui.obj water.obj worldmap.obj
+simblob.exe
+simblob.map
+stdcpp.lib c_alias.lib os2.lib e:\toolkit\lib\dive.lib emx.lib emx2.lib emxio.lib gcc.lib m.lib sys.lib c_import.lib c.lib malloc1.lib 
+simblob.def

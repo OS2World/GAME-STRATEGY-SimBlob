@@ -1,0 +1,196 @@
+______________________________________________________________________
+    SimBlob / BlobCity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+27 February 1999
+
+I've been working on this game in my spare time since 1994.  I'm now
+working on my PhD thesis and I'm soon going to have a full time job at
+a startup, and I don't think I will be able to work on this game
+anymore.  Also, my reasons for working on this game were educational:
+I've more learned about threads, GUIs, simulation, object oriented
+design (and when not to use objects), STL, and C++.  So I'm now
+releasing the source code, hoping that three audiences will benefit:
+1. Someone new to writing OS/2 games might find some of this code
+useful; 2. Someone writing environmental simulation games might want
+to look at my simulation code; 3. Someone who wants to port SimBlob to
+another platform needs this code.  I'm also hoping someone will take
+over the OS/2 version of this project, but even if no one does, there
+are parts of this game that will be useful for other projects.
+
+                - Amit Patel
+
+
+CONTENTS:
+
+Notes on compiling
+List of modules
+Summary of the design
+Porting
+
+______________________________________________________________________
+Notes on compiling the source:
+
+
+I am using PGCC, not plain old EMX/GCC.  I'm also using IBM's OS/2
+toolkit for header files and some libraries (especially DIVE).
+
+Here's what I have set up in my library and include paths:
+
+SET LIB=E:\emx\lib\mt;E:\emx\lib
+SET INCLUDE=E:\Toolkit\H;E:\Toolkit\INC;.;
+
+You will of course have to change this for your system.
+
+I am using GNU Make for the makefile.  The makefile is set up to
+automatically figure out dependencies for C++ sources by writing the
+dependencies to *.d files.
+
+You will have to modify BUILD.RSP because a few directories are
+hard-coded in there.  :-(
+
+You should be able to run 'make' and get simblob.exe to run.
+
+______________________________________________________________________
+Modules
+
+The modules that are OS/2-specific and will have to be rewritten for a
+different GUI:
+
+Figment (creating windows, drawing on them)
+Blitter (drawing bitmaps to the screen)
+BmpFormat (not used anymore)
+BufferWin (link Figment to an array of pixels)
+StatusBar (link Figment to a Layer object)
+InitBitmaps (used only to generate the bitmaps)
+Menu (encapsulate the interface to OS/2 menus, tie to portable Subjects)
+
+The modules that are OS/2-specific and will have to be modified or
+rewritten for a different operating system:
+
+Control (threads and reporting status information)
+GameInit (threads and initializing the map)
+Notion (mutexes, regions, damage areas)
+
+The modules that are OS/2-specific and will have to be modified or
+rewritten for a different user interface:
+
+ViewWin (set up the main map view window)
+GameWin (set up the main game window with UI controls)
+MainWin (set up the frame around the game window)
+Paint (repaint the window in a separate thread)
+WorldWin (set up the minimap in the lower left hand corner)
+SimBlob (the main module)
+Palette (handle OS/2 palette setting)
+
+These modules should be mostly portable to other systems:
+
+(the following could be used in other programs)
+
+Closure (combine an object and pointer to member function; for callbacks)
+
+Glyph (a basic unit of user interface)
+Layer (a basic layer of window contents, with transparency)
+GlyphLib (some useful glyphs)
+Layout (how to combine glyphs into rows and columns)
+TextGlyph (immutable & mutable text glyphs and a layer that contains glyphs)
+Sprites (routines for storing and drawing sprites and fonts)
+
+(the following are for SimBlob)
+
+Tools (handles the tools on the SimBlob toolbar)
+UI (sets up the glyphs that are used for SimBlob's UI)
+View (various layers used to construct the SimBlob map view)
+
+RGBTable (the 256-color palette used for SimBlob sprites)
+Images (a collection of sprites used for SimBlob)
+
+(the following are for SimBlob, and should be completely UI independent)
+
+Map (store the map data)
+MapCmd (store commands that are to be executed on the map)
+Unit (represent the blobs---firefighters, builders, lumberjacks)
+Terrain (algorithms to work with the map terrain)
+Path (algorithms to find paths for blobs; uses A*)
+Simulate (miscellaneous algorithms for the map)
+Military (algorithms related to the blobs)
+Water (algorithms related to water and erosion)
+
+
+______________________________________________________________________
+A short summary of the overall design:
+
+There's map data (map.cpp) that is modified by the simulation thread
+(simulate, terrain, unit, path, mapcmd).  There are arrays of various
+kinds of data (altitude, water, terrain type, tree age, etc.) in there
+that are modified by functions.  This portion of the game is what I've
+worked on the most.  The basic philosophy here is that instead of
+writing code to do particular things (like form meandering rivers), I
+am trying to write rules that produce the effects I want.  Those rules
+may produce other (unexpected) effects too.
+
+The input thread (gamewin, mainwin, viewwin, menu, tools) receives
+mouse clicks and keyboard commands from the user and after some
+convoluted processing, turns them into commands to execute.  These
+commands typically modify the map or feed commands into the command
+queue (mapcmd).
+
+The output thread (paint, blitter, view, layer, glyph, layout,
+sprites, glyphlib, textglyph) looks at the map and draws it to the
+window.  The whole system is somewhat complicated in part because I
+wrote one thing (figment), decided to make a better system (layer),
+and then wrote yet another UI library (glyph).  Figment interfaces
+with the OS/2 windowing system.  BufferWin/StatusWin are Figment
+windows that contain a PixelBuffer, and use Blitter to paint the pixel
+buffer to the OS/2 window.  StatusWin also contains a Layer, and the
+Layer draws onto the PixelBuffer.  
+
+The layers are window-sized areas that can be partially transparent.
+The way to think of the layer library is a set of transparencies.  The
+View module contains SimBlob-specific layers like terrain, blobs, and
+cursor/selection, and draws them to the pixel buffer.  On the
+"TextLayer" layer, you can place any number of glyphs.  (However,
+glyphs can also exist without being on a layer.)
+
+For the user controls I use the glyph libraries (glyph, layout,
+glyphlib, textglyph).  The buttons and textual information around the
+map are drawn with glyphs.  Glyphs can be any size and can overlap.
+They also handle mouse clicks and layout (rows, columns, and overlay).
+The philosophy behind the glyph library is to provide several tiny
+classes and then combine the objects to produce the widgets you want.
+In addition, these glyphs are tied to Subjects (see the
+Subject-Observer pattern in _Design Patterns_).  For example, a button
+is the combination of a 3D border, a glyph that handles mouse clicks
+(and calls a callback), a highlight glyph that brightens up the button
+whenever the mouse pointer is over it, a text or icon glyph, and a
+background glyph.  I reuse these glyphs in other widgets... for
+example, a radio button is just like a button except the mouse click
+glyph is replaced by one that alters some value (a Subject).  A check
+box is the same, except the glyph toggles some value.  The 3D border
+can be used elsewhere too; the highlight is used for the notebook
+tabs; the text and icon glyphs can be used in many other places.
+
+______________________________________________________________________
+Porting:
+
+If you want to port the game to another platform, I can think of three
+approaches:
+
+   1.  Modify the existing OS/2 code (threads and windowing) for
+       your system.  This may make more sense for MS Windows than
+       for other systems.
+
+   2.  Replace the OS/2 windowing code and threading code with
+       your own, but continue to use the more portable user
+       interface code (sprites, glyphs, layers, pixel buffers, etc.).
+       The main limitation here is that I generated all the graphics
+       and code for 8-bit palettes.
+
+   3.  Replace the entire user interface with a new one, but continue
+       to use the simulation code.
+
+In any case, feel free to ask me questions about the code or game
+design.  I'd love to hear about any work anyone is doing with this
+game!
+
+   - Amit Patel, amitp@cs.stanford.edu

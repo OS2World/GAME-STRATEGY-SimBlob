@@ -1,0 +1,2111 @@
+***1998
+
+***September 17
+
+*Rewrote the blob scheduling algorithm for firefighters.
+
+***September 4
+
+*Began implementing the lumber/logging industry.  This implementation
+can be extended to firefighting and building, so I plan to remove the
+old firefighting and building code and replace it with a single blob
+scheduler that can handle lumberjacks, firefighters, and builders.
+The new implementation should be smaller <EM>and</EM> faster.
+
+***September 3
+
+*Worked out details of the lumber/logging industry.
+
+***August 19
+
+*Improved the terrain generation algorithms.  There should no longer
+be obvious vertical and horizontal lines on the initial map.
+
+*Changed the firefighter routines to disable themselves when there are
+no fires around.  This speeds up the game by 10 to 15 percent (when
+there are no fires on the map).
+
+***August 18
+
+*Found and (hopefully) fixed a bug that caused blobs to walk in weird
+paths when their destination was blocked.
+
+***August 17
+
+*Designed parts of the lumber/logging industry for BlobCity.  Forests
+will be needed to build and sustain a city, so the player will have to
+conserve some forests to survive.
+
+***August 15
+
+*(Internal) Cleaned up and removed old code that was not being used.
+
+***August 7
+
+*(Internal) Cleaned up a lot of code internally and added more checking to help
+me find any memory errors.
+
+***August 3
+
+*(Internal) Worked on the path-finding code.  I'm investigating better data
+structures to use, which would speed up path-finding.  If I get them
+to work, I will post the new path-finding code on my Games Programming
+page.
+
+***August 1
+
+*Changed the world map so that you can no longer drag the highlight
+rectangle off the top or right edge.
+
+***July 29
+
+*(Internal) Worked on the path-finding code.
+
+***July 27
+
+*Converted the display of altitudes and water depths to the metric system.
+
+***July 26
+
+*Added a context menu to the World Map that allows you to change the
+type of view: normal (terrain, roads, water, trees), terrain (water,
+trees, and shaded terrain), and civilization (roads, water, houses,
+farms, markets).  To some extent, the "View" menu (from which you can
+control whether roads, structures, water, etc., are drawn) will
+control what is drawn on the World Map too.  On the Civilization view,
+markets are bluish green, houses are red, and farms are purple.
+
+***July 24
+
+*Tweaked the market/house/farm placement algorithm some more.
+
+***July 23
+
+*Changed the erosion algorithm to take rivers and lakes into account.
+Since water flow already has erosion built in, the soil erosion is
+made weaker for watery areas.
+
+***July 22
+
+*Improved the food/labor algorithm to make food and labor flow from
+market to market more easily.  It still needs more improvements.
+
+***July 20
+
+*Fixed a bug with the food/labor algorithm.
+
+*The Diety option, "Build Roads", now is biased towards building roads
+on an invisible grid of hexes.
+
+*The Diety option, "Build Roads", now builds both bridges and roads.
+
+*On the World Map, water was previously displayed on top of bridges.
+Now, bridges will be on top of water.
+
+*Improved the food/labor algorithm to be more "fair" -- it was giving
+more food and labor to farms and houses on the southwest side of a
+farm.  (Many of my algorithmsscan from southwest to northeast, so
+there are occasionally artifacts like this that result.)  The
+algorithm now goes through the farms and houses around the market in a
+random order.
+
+*Added a context (right-button) menu to the world map; it does not do
+anything yet.
+
+*Fixed a memory corruption bug that occurred whenever (on the world
+map) the view rectangle was dragged off the right side of the map.
+Programmers: never underestimate the power of overloading operator [].
+
+*Completely redid the tree bitmaps.  The trees are now displayed in an
+overhead view, and they change with the season and the age of the
+trees.  Unfortunately the bitmaps are taking up over 150k, so I may
+not keep both the age and the seasonal variation.
+
+***July 15
+
+*Changed the houses from having populations 16, 32, 48, etc., to 15,
+25, 35, etc.  There is no reason for me to impose computer-based
+numbering (base 2) on users.
+
+***July 10
+
+*Removed Auto-Build from the menus.
+
+*Fixed some bugs with map creation.
+
+*Improved the information reporting when using the "select" tool.  The
+new format is "[Terrain Type] field:value field:value ..." where a
+field is something like "elevation" or "water".
+
+*Implemented the new food/labor algorithm.  All workers and farmers
+meet at markets, so without a market nearby, nothing will happen (as
+far as economics goes).  The algorithm needs to be tuned a lot, so at
+the moment many of the numbers won't make sense.
+
+***July 9
+
+*Created new house bitmaps.  Instead of spheres, houses are now
+polygonal and are shaded using 3D lighting models.  Being only five
+pixels across, this probably doesn't help.
+
+*The farm bitmaps now vary with the season.
+
+*An asterisk marks the center of your city.  The city center is used
+by some of the economics calculations.
+
+***July 8
+
+*Continued to work on a new food/labor algorithm, which uses markets.
+
+*Wrote a "tabbed window" control for the money, population, and speed
+controls; now I'm using that instead of buttons.  The tab and the pane
+"light up" when the mouse moves over the tab button.
+
+***July 5
+
+*Adjusted the water flow algorithm to make lakes more stable.  When
+lakes form, they are likely to keep their shape for some time.
+Previously, lakes would shift unpredictably until they dried up.
+
+*Changed the highlight on the world map from a dark transparent
+rectangle (which made it harder to see the contents) to a red
+"marching ants" rectangle.  If this is too distracting I may change it
+to a solid non-animated rectangle.
+
+***July 2
+
+*Began to work on a new food/labor algorithm, which will take markets
+into account.
+
+***June 27
+
+*Realized that the food/labor (network-flow) algorithms aren't working
+well in the new building system, because it only works when farms and
+houses are next to roads, and it doesn't take markets into account.
+
+***June 26
+
+*Finished implementing the new building system.
+
+***June 25
+
+*Began to implement a new building system that includes houses, farms,
+and markets.  Markets tend to be built near city centers; houses tend
+to be built where there is easy access to markets; farms tend to be
+built away from cities.
+
+*Removed Auto-Build mode, since it was incompatible with the new
+building system.
+
+***June 24
+
+*Removed 'groundwater' from the simulation.  It just wasn't working
+very well.  Also removed the constant rain.
+
+*Changed the water scale (number of water units per altitude unit)
+significantly.
+
+*Changed the water flow algorithm to make more water flow than
+previously.  The hard part about discrete water flow is that real
+water flow is continuous: the old water is moving out of a space at
+the same time that new water is moving in.  The game's water flow is
+discrete: water moves in either before or after water moves out.  I'm
+hoping the new formula will make water flow behave more like
+continuous flow.
+
+***June 23
+
+*(Internal) Cleaned up a lot of code to reflect changes in the C++ Standard.
+
+***June 20
+
+*Realized that the style of the list of changes has shifted from "X
+was done" to "Did X".  Oops.
+
+***June 17
+
+*Added experimental rain that falls on western slopes of mountains.
+The hope is that the rain will fill the water tables and produce
+rivers of some sort.
+
+***June 16
+
+*Fixed a bug that caused erosion inside trenches.
+
+*Added 'groundwater' to the simulation.  Some of the water that goes
+on the map will be stored in the ground rather than on the surface.
+This water can later reappear at the surface.
+
+***May 18
+
+*Fixed a bug that could lead to incorrect initialization of menu items
+that act like checkboxes or radio buttons.
+
+*Made the path-finding routines thread-safe.
+
+***May 17
+
+*The number of blobs that will come out to build things depends on
+your population.  At first, only one builder blob will be created.  At
+every 100,000 in population, you will be able to have one additional
+builder blob.
+
+***May 16
+
+*The Debug menu lets you view the internal results of the Build Roads
+feature.  White areas are those that ranked higher for roads.
+
+***May 15
+
+*The new Diety option "Build Roads" will erase existing roads, then
+scan the map for twenty seconds or so, then build new roads where it
+thinks highways should be.  This is an experimental feature that may
+be used in The Silver Kingdoms.
+
+***May 10
+
+*The popup menu currently starts the train going across the map.
+
+***May 9
+
+*Added support for popup menus.  These will eventually be attached to
+objects on the map.
+
+***April 23
+
+*There is now an information area above the main map area.  The
+information area will be used to display detailed information such as
+employment, maintenance costs, income, and food production.
+
+*The money display, population display, and speed display are now
+buttons that control what is displayed in the information area.
+Clicking on the money button leads to the Financial Page, which will
+eventually show income, maintenance, and spending.  Clicking on the
+population button leads to the Census Page, which shows employment,
+jobs, food production, food consumed, and a few other things.
+Clicking on the speed button leads to the Speed Page, which shows
+information about how quickly the display is being updated.
+
+*The status bar now has two sections: the left section shows the
+currently selected tool; the right section shows either help about the
+current tool or information about what is underneath the mouse
+pointer.
+
+***April 22
+
+*I experimented with overlaying information about employment,
+population, and so on, over the map but having information that
+doesn't scroll when the map causes some design problems, and it leads
+to slower screen drawing, so I took it out.
+
+***April 11
+
+*The Population display is now a button; clicking on it cycles through
+Population, Jobs, and Food Production.
+
+*The speed display is also a button; clicking on it cycles through
+Ticks/Sec., Frames/Sec., and Pixels/Sec.  Ticks are a measure of
+internal simulation speed (water flow, blob movement, and so on).
+Frames are a measure of how often the window is being updated.  Pixels
+measure how much of the window is being updated.
+
+*Fixed mouse movement code so that if a button is highlighted and you
+move outside the window, it catches it and unhighlights the button.
+(This may not work in OS/2 Warp 3 without FP 17 or higher.)
+
+*I still plan to change the user interface more, but I need to write
+some more code first.
+
+***April 10
+
+*Changed the location of information (population display, silver, and
+so on.)  to work better when the window is smaller.  There is now a
+bar at the top of the map window that shows silver and population.
+This allows the left information panel to be smaller, and information
+won't be cut off if the window is at the default size.
+
+*Moved the Tool help from just above the world map to the status bar;
+moved the date to just below "BlobCity" on the information panel.
+
+*The current (game) year is now displayed along with the date.
+
+*Experimented with putting the horizontal scrollbar at the top; it's
+just too weird.
+
+***April 9
+
+*Removed the help in BlobCity, because it was leading to system instability.
+
+***March 22
+
+*Added a small amount of help to BlobCity.
+
+***March 21
+
+*Implemented a very basic prototype of The Silver Kingdoms economics.
+
+***March 20
+
+*Worked on a design of basic economic formulas for The Silver Kingdoms.
+
+***March 16
+
+*Fixed a bug with mouse movement outside the window resulting in the
+cursor appearing in the lower left corner.
+
+*(Internal) Fixed a potential bug that could result if altitudes got
+out of range.
+
+***March 8
+
+I tried upgrading my machine from a Pentium/133 to Pentium/200 but there
+have been some problems with instability, so I haven't worked on SimBlob
+lately.
+
+***March 4
+
+*Changed the flow through gates to one foot of water per tick.
+
+***March 3
+
+*SimBlob now installs two-color mouse pointers for use in the map
+window.  Two color pointers usually reduce or eliminate pointer
+flicker.  The mouse pointer may change depending on the tool being
+used.
+
+*The scale of the map has been changed.  The highest mountains are now
+750 feet higher than the lowest valleys.  Walls are 120 feet high.
+Trenches are 50 feet deep.  The terrain is simulated down to the
+nearest six feet, but water is simulated down to the nearest inch.  It
+is possible that I will change terrain simulation to work down to the
+nearest foot.
+
+***March 2
+
+*(Internal) Fixed bugs in the selection tool.
+
+***March 1
+
+*Added a new tool, called the <EM>Select Tool</EM>.  This tool allows
+you to point to an object on the screen and find out what it is.
+Later, it will allow you to click on an object to learn about its
+details.
+
+***February 27
+
+*Reduced the executable size significantly by moving some data to
+external files and moving other data from compile time initialization
+to run time initialization.  Two weeks ago the executable was 400k,
+and now it is 220k.
+
+***February 26
+
+*Increased the water flow rate to make water flow look better.
+
+***February 22
+
+*(Internal) Created a train object that can move around.
+
+***February 21
+
+*Worked out train physics for acceleration, deceleration, movement on
+hills, and so on.
+
+*Worked out train display formulas.
+
+***February 20
+
+*Added train graphics, for future use by a train/transport moving
+around the map.
+
+***February 15
+
+*Improved map creation.
+
+*Removed the splash screen bitmap, since it was taking up 25% of the
+ZIP file and 40% of the EXE file.
+
+*(Internal) Fixed a bug with dragging the mouse to draw something.
+
+***January 24
+
+*Improved path-finding so that blobs who need to walk a long distance
+can search part of the path, walk that part, and then search the rest
+of the path.
+
+*Greatly improved the path-finder speed when the Path setting is "Fast".
+
+*To learn more about economics for The Silver Kingdoms, I have been
+reading many books about both economics and biology, including books
+by Rothschild, Gould, and Kauffman.  With each book I was excited with
+the ideas at first, but I came away with nothing really compelling.  I
+am now reading some papers by <A
+HREF="http://web.mit.edu/krugman/www/">Paul Krugman</A>, who
+criticizes the authors I was reading previously for having too many
+ideas and not enough substance.  Krugman, unlike the other authors,
+seems convincing, although each of the other authors seemed convincing
+at first.  (I have the feeling that he is different, though.)  In a
+month or so, I hope to have a good economic model for The Silver
+Kingdoms.  I also plan to read about geography and history of cities
+to get more background material for the game.  Krugman has done some
+work on combining economics and geography, and I hope that will be
+useful for me to make city placement an important part of The Silver
+Kingdoms.
+
+***January 23
+
+*(Internal) Worked on path-finding improvements.
+
+***January 20
+
+*Reimplemented major speed improvements with non-DIVE drawing code.
+The mouse cursor follows the pointer much more closely now.
+
+*When using the blob tool, blobs won't be created until there are no
+blobs in the starting position (marked by a big 'B'), because only one
+blob should be in any hex at one time.  The blobs will wait to be
+created until there are no blobs in that position.
+
+*Optimizations with map traversal and blob movement have boosted the
+simulation speed by up to 30%.
+
+*Fixed a memory leak with auto-build mode and blobs.
+
+***January 19
+
+*Fixed a MAJOR bug with path-finding.  Thanks go again to Tels,
+although this time instead of finding the problem he questioned part
+of my code, which turned out to be incorrect.  Path-finding appears to
+be working perfectly now, for the first time.  (Unfortunately, it's
+not working well for longer paths.)
+
+*Fixed some minor problems with the uneven distribution of trees and
+volcanos.
+
+*Volcanos work better now, with lava flowing downhill just like water does.
+
+*You are not charged for building something until the blobs actually
+build it.  Previously, you were charged when you asked for something
+to be built.
+
+***January 17
+
+*The path-finding code is slightly faster, thanks to Tels (author of G.W.A.N.).
+
+*A bug with houses and farms being built on top of roads was fixed.
+
+***January 12
+
+*A new Deity menu option, "Flash Flood", will make rivers rise and
+possibly go over their banks.
+
+***January 8
+
+*I just got Civilization II.  Don't expect any changes to SimBlob for
+a while ..
+
+***1997
+
+***December 28
+
+*The world map is much more responsive when you try dragging the mouse around.
+
+*The world map now shows the location of blobs.
+
+***December 25
+
+*There is a new hybrid drawing mode that uses DIVE and slow PM.
+(Previously, the hybrid mode was DIVE and fast PM.)  DIVE support is
+still experimental, and the hybrid modes are even more experimental,
+so use at your own risk!
+
+*You can now control separately what kind of drawing is used for the
+controls around the window (left panel, world map, and status bar) and
+the main map.  The first argument to SimBlob tells it what to use for
+the main map, and can be FASTGPI, SLOWGPI, FASTHYBRID, SLOWHYBRID, or
+DIVE.  The "Fast" versions use GpiDrawBits, which is fairly fast, but
+isn't supported in a few video drivers.  The second argument tells
+SimBlob what to use for the controls, and can have any of the five
+values listed above.  The default is FAST for both.
+
+<P>It is <EM>not</EM> recommended that you use DIVE or the HYBRID
+options for the controls.
+
+*The InitMap.txt commands have changed, so take a look at
+Data/InitMap.txt again if you are using a custom InitMap.txt.
+
+***December 24
+
+*The path-finding works somewhat better now.
+
+*Blobs can now climb over walls, but it takes some time.
+
+*Blobs can now build and erase walls.
+
+*Idle blobs will move around randomly now.
+
+*If a blob realizes that some other blob has already performed its
+job, then it will stop and do something else.
+
+***December 23
+
+*Christmas Graphics add-on, with Santa Blobs (carrying candy canes and
+wearing Santa hats) and Christmas Trees was released.
+
+***December 22
+
+*The menus have been rearranged to group all the "Simulation" and all
+the "View" options together.  (The difference being that in the future
+there may be more than one "View" but only one "Simulation".)
+
+***December 21
+
+*The path finding code is somewhat faster, thanks to optimizations
+suggested by Tels (author of G.W.A.N.).
+
+*The path finding code uses an adaptive cutoff instead of a static
+cutoff.  The cutoff determines when the path finder gives up and
+returns a partial path.  The cutoff is now determined based on the
+length of the path needed and the number of times the blob has been
+trying to find a path to the goal.  As the distance to the goal
+increases, the cutoff increases.  Also, the more times the blob tries
+to find a path, the longer the path finder will search.  (In some ways
+this is like Iterative Deepening A*, in that it will only try so far
+but if it fails, it will try again, going deeper into the search.)
+
+*Occasionally, water wouldn't flow out of a spring because the spring
+was too low in a valley.  This bug was fixed.
+
+***December 20
+
+*Fixed a bug with water tending to go north and east more than south
+and west.
+
+*The map creation system is now controlled through a file called
+InitMap.txt.  You can edit this file to change which algorithms are
+used to generate a map, and in which order they are applied.  With
+this file you can choose whether you want good maps (which take a
+while to generate) or fast maps.  The algorithms available and their
+names are likely to change soon though, so if you make a custom setup,
+check the InitMap.txt that comes with the game each time you download
+a new version.
+
+<P> SimBlob will look both in the SimBlob directory and the Data/
+subdirectory for InitMap.txt.  I recommend copying the file from the
+Data directory into the main SimBlob directory, and editing it there.
+
+***December 18
+
+*Fixed a bug with blobs that may occur after running the game for
+several hours.
+
+*When a blob is idle, he will look around for nearby jobs first, so
+that he won't have to walk far.
+
+*The blob scheduler has been disabled, and instead blobs just pick for
+themselves which task to perform next.  (The two were conflicting.)
+The goal is to have the blob scheduler assign tasks, and only if it
+doesn't give orders, then do the blobs choose for themselves.  This is
+based on biology: muscles and nerves can act by themselves, unless
+supressed by higher level orders from the brain.  This is why chickens
+keep running around after their heads are cut off.  <CODE>:)</CODE>
+Here, blobs should be able to continue functioning even if the main
+task scheduler has no orders for them.  However, I need to think some
+more about how the scheduler should work.
+
+***December 17
+
+*If a new building order comes in that is in the same location as an
+existing order, it replaces it so that a blob won't waste its time
+working on something that's going to be replaced.
+
+*Blobs will pick the nearest job assigned to them instead of picking
+the first one on their list.
+
+*Blobs should no longer get stuck trying to get past another blob.
+
+*A hexagon is drawn around a hex that is waiting for a blob to work
+there.  It is bluish green if a blob has been assigned to work there,
+and dark gray otherwise.
+
+***December 16
+
+*(Internal) I've finished reimplementing the way blobs build things.
+
+*Up to six blob builders can be around at any one time.  
+
+*Jobs will be assigned to the blob builder closest to them, but this
+"greedy" algorithm isn't an ideal way to schedule blobs.  It is,
+however, better than the previous algorithm, in that a blob will try
+to take several related jobs at once.
+
+*Blobs do not build walls or set fires.  (This will take some more work.)
+
+*(Internal) Several bugs involving blob creation and movement have been fixed.
+
+***November 30
+
+*(Internal) I've written some general guidelines for myself for using
+data without thread locking.  I'm adapting the implementation of blob
+storage to follow these guidelines.  It's a little bit less
+restrictive than my previous guidelines, so the way blobs are stored
+can be more flexible.
+
+***November 26
+
+*Blobs can now accept up to six tasks instead of one.  This way they
+won't sit idle after finishing one; they will know where to go next
+without waiting for new orders.
+
+***November 22
+
+*(Internal) The way the blobs are stored is being redone to reduce the
+amount of thread locking needed, and also to support a new version of
+blob task assignment.
+
+***November 16
+
+*Instead of sending a lot of blobs to build something, a few are sent, and
+they receive new orders after completing each task.  (Blobs are reused.)
+
+***November 15
+
+*(Internal) The simulation thread has a command queue that stores
+commands that have not yet been executed.
+
+*When you draw with the mouse, the effects are not seen immediately.
+Instead, they are fed into the command queue, and the building is
+handled at the rate of one hex per tick.
+
+*Blobs are sent to build the things you select with the mouse.
+
+***November 6
+
+*The map is now larger.
+
+***November 5
+
+*The altitude equalization routine has been modified so that it
+produces more grasslands than mountains.
+
+***October 27
+
+*The soil erosion algorithm was modified to do fewer hexes at a time, so
+that you no longer see an abrupt erosion "jump" from time to time.
+
+***October 26
+
+*The water erosion formulas were changed, hopefully so that rivers don't
+mutate into lakes after ten million ticks.
+
+***October 12
+
+*The font is slightly better.
+
+*During initialization, the progress (as a percentage) is shown on the
+status bar.  The progress is calculated dynamically based on the
+initialization during the previous execution of SimBlob.  This way, it
+is calibrated to your computer's behavior, and it is not reliant on
+your computer being similar to mine.  (The data is stored in
+Data/Progress.dat, for those of you who are curious.)
+
+*The text in the world map window is more readable, thanks to a dark
+background rectangle.
+
+*If there is a cost to building an item, that cost is displayed along
+with the name of the item under the tool area.
+
+***October 5
+
+*The killing of threads when you exit the program during
+initialization is improved.  For reference, the thread priorities are:
+Main:Regular+0, Paint:Regular+0 (when the window is active),
+Paint:Idle+6 (when the window is inactive), Initialization:Idle+31,
+Simulation:Regular+0.  While exiting, the thread priorities are
+increased to Regular+31 so that they can quickly finish whatever
+they're doing, and exit.
+
+*The main font is now Hershey-Plain 12.  The Hershey fonts are
+basically free so I don't have to worry about licensing of fonts.
+
+*The current tool is highlighted in red, instead of a gradient gray.
+(The red is easier to see.)
+
+*The textured background is gone; I'm experimenting with a cleaner,
+simpler look.
+
+*There is a new option to the Speed menu to control anti-aliased
+drawing.  The default is on but you may want to experiment with
+turning it off to see if it draws any faster.  Unfortunately at this
+time, fonts look awful without anti-aliasing.
+
+*The name of the current tool is displayed below the tool area.
+
+***September 19
+
+*Blobs that came out of a watch tower will go back in if they have
+nothing to do.
+
+*Blobs that come out of a watch tower are worker blobs; blobs that you
+create with the blob tool are soldier blobs.  For now, both fight
+fires.
+
+***September 17
+
+*The tool objects can take the Ctrl modifier into account.  Also, only
+some tools default to line-drawing mode.
+
+***September 8
+
+*(Internal) The logic for determining whether the current cursor is
+valid has been moved into the tool objects.
+
+*When using the Blob tool, the cursor is shown only when the pointer
+is over a blob.
+
+***August 20
+
+*(Internal) A "text style" class collects all the font style settings
+in one place.
+
+***August 18
+
+*The thread priority for the map creation have been adjusted to Idle +7.
+
+***July 30
+
+*BlobTool lets you send a firefighter blob to a particular location.
+
+*The tool buttons have been rearranged because there are now ten
+instead of eight.  The new buttons are the 'firefighter blob' button
+and the 'fire' button.
+
+*With the blob tool, you can tell a blob where to go.  Just drag the
+blob to a new location, and it will walk there if it can find a way.
+(Use the right mouse button to drag.)
+
+***July 29
+
+*(Internal) BuildTool is a Tool object that is used for building.  The
+current mouse behavior for the primary mouse button (click and drag to
+build something) will be put into BuildTool.  Note: the build tool
+doesn't yet handle Ctrl and Shift modifiers properly.
+
+*Other tools that are being designed are the SelectTool, which is used
+to select objects such as soldiers, farms, houses, and firefighters.
+This tool will also be used to give orders to the blobs.  Another tool
+is the BlobTool, which will let you send a blob to a particular
+location.
+
+***July 26
+
+*(Internal) A new Tool class replaces the one I lost a year ago.  It
+is based on CUA actions like drag, context-menu, and open, instead of
+physical mouse actions like right-drag, right-click, and
+left-double-click.
+
+***July 21
+
+*SimBlob should now follow the Mouse Settings more closely.  For
+example, if you change the mouse setting for "context menu" to
+Shift-LeftClick, then SimBlob will use the new setting instead of the
+default RightClick.  I'm not sure what happens when the settings
+conflict.  For example, some people like to drag objects with the left
+mouse, but left-drags are considered "swipes" (multiple object
+selection).  Also, it is possible to set up the left mouse button to
+bring up a context menu; should SimBlob consider left-click a draw
+request or a context menu request?  At any rate, these concerns are
+present in other applications as well, and SimBlob's behavior will be
+consistent with them.
+
+***July 20
+
+*(Internal) I'm now using Menu objects instead of handling menu
+commands directly, with PM functions and message handlers.  The menu
+objects have made menus easier to work with and more flexible at the
+same time.  Also, the game is slightly smaller due to elimination of
+repetitive code.
+
+*(Internal) All the menu items that have checkmarks are now handled
+with the "Subject-Observer" pattern.  This pattern lets me merely set
+the variable and have the menu item automatically update itself.
+Also, if one chooses the menu item, the variable automatically updates
+itself.
+
+*A new blitting mode (HYBRID) is available.  Each time something needs
+to be drawn, hybrid mode will select DIVE or PM, depending on which
+would be faster.  Unfortunately, DIVE and PM seem to treat bitmap
+colors differently, at least in 16-bit color mode, so I'm getting 
+some strange colors at times.
+
+***July 19
+
+*(Internal) I've made it easier for me to use the "Subject-Observer"
+design pattern.  The code has become slightly smaller, and I've
+started using this pattern in more places.
+
+***July 18
+
+I've been experimenting with the water simulation.
+
+*Water levels are now calculated in inches rather than feet.  This
+gives the simulation more detail.
+
+*Under 6 inches of water will not cause water damage to houses, farms,
+or roads.
+
+*Small pools of water will evaporate more quickly.
+
+***July 1
+
+I've been playing <A HREF="http://www.stardock.com">Entrepreneur</A>
+instead of working on SimBlob.
+
+***June 7
+
+*The firefighters can now detect fires in a larger area.
+
+*Auto-build mode only extends roads; it does not create new ones.
+
+*A new Debug menu allows you to view debugging information
+graphically.  Preferences are white if blobs want to build a road, and
+black if blobs want to build a farm or houses.  Labor is lighter if
+there are a lot of workers travelling along the roads.  Heat is white
+for hot areas (caused by fire); it is black for cold areas (caused by
+extinguishing fire).  Food is lighter if a lot of food is being
+transported along the roads.  Moisture is lighter if the area is near
+moisture.
+
+*After being able to visually see simulation variables, I was able to
+fix several bugs, including ones in auto-build mode, in labor
+calculations, in food distribution, in fire watchtowers, and in
+moisture calculations.
+
+***May 11
+
+*The fonts are nicer.
+
+*The descenders on lowercase letters of fonts no longer get cut off.
+
+*For now, firefighters will emerge from Watchtowers but they don't go
+back in.
+
+*When there is a fire on the map, the world map will display "Fire!"
+
+***May 10
+
+*Watchtowers are buildings where firefighters watch for nearby fires.  If
+there is a fire nearby, a firefighter will exit the building to go fight
+the fire.
+
+***May 4
+
+*The date that SimBlob was compiled is shown in the information area on the
+top left.
+
+***May 3
+
+*The drawing code was optimized.
+
+*The experimental river basin algorithm was modified, but it still isn't
+very good.
+
+***May 2
+
+*The terrain generation was modified with an experimental river basin
+generation algorithm.
+
+***April 26
+
+*The mouse pointer changes to show you which tool is being used.
+
+***April 18
+
+*You can no longer erase fires.
+
+*The cursor will disappear if you are not allowed to use the current
+tool in the current location.  If you try an invalid drag operation,
+it will draw red hexagons instead of the normal drag hexagons.
+
+*There are no longer canals in the game.  Instead, there are
+"trenches".  The difference is that a trench is not concrete-lined, so
+there is a small possibility of erosion, and also that you can build
+other things in a trench.  (For example, you may wish to build a gate
+in the trench to control water flow, or build a bridge over the
+trench.)  The "canal" button is still there, but it now creates trenches.
+
+*To erase a trench, you must first erase whatever is built on/in them.
+
+***April 13
+
+*In DIVE mode, only the main map is drawn with DIVE.  (Previously, the
+statusbar and other parts of the window were drawn with DIVE as well.)
+
+*A bug was fixed with the cursor; it now follows the mouse much more
+closely.
+
+*(Internal) Buttons have been implemented with the new Glyphs.
+
+*I'm now using new buttons for the toolbar.  Finally, just about all
+the controls have been switched over to the new graphics format that
+I introduced last year.
+
+***April 12
+
+*When using the Shift key during mouse drag, the behavior depends on whether
+you are holding shift at the beginning of the drag, not during the drag.
+
+*The `scorched earth' graphics after a fire show gradual fading rather
+than sudden fading.
+
+*You can right-click on the status bar button to cycle through in reverse
+order.
+
+***March 30
+
+*(Internal) I've again redesigned the Glyph system.  I found a flaw in
+the previous design that was keeping me from the next step: the
+ability to click or drag map objects.
+
+*(Internal) I've rewritten large parts of the graphics system to use
+the new Glyphs.  A side effect of this new design is that parts of SimBlob
+have become simpler and smaller.
+
+*SimBlob will remember the window position when you close it and use
+that window position again when you run it again.  The information is
+stored in <code>os2.ini</code> but it is very small (probably under
+200 bytes).
+
+*Text Glyphs can now have justification (Left, Center, Right) assigned
+to them.  The numbers in the information area are now right-justified
+for easier reading.
+
+*I discovered and fixed several bugs with some of the Glyphs.
+
+*I discovered and did not fix several bugs with some of the Glyphs.
+
+*There is a button in the statusbar that lets you cycle through the
+different kinds of speed indicators in the game.  This uses one of the
+features in the new Glyph system: overlapping glyphs that can be
+individually turned on or off.
+
+***March 13
+
+*The cursor is now drawn with the new layered graphics system.  It
+shouldn't flicker anymore, and there should be fewer display problems.
+
+*The the old graphics system was eliminated, since only the cursor
+code was still using it.
+
+*For debugging purposes, if SimBlob crashes, it will create a trap
+file (<code>simblob.trp</code>) in the current directory.
+
+*Water sources are placed in a circle around the map, rather than in
+random positions.  This ensures that no part of the map is too far
+from water.
+
+***March 11
+
+*The path-finding algorithm for blobs is improved.  There is now an
+absolute limit on the number of hexes that can be searched before a
+path is found -- currently it is approximately one-tenth of the map.
+If no path is found in that time, the blob will just walk to a point
+closer to the goal, and then later it will calculate another path to
+the goal.
+
+*If a blob finds an unexpected obstacle in his way, he will not
+recalculate the <EM>entire</EM> but will rather recalculate the first
+15 steps of of the path, in hopes that that will get him around the
+obstacle.  If it does not, then he will calculate the entire path
+again (subject to the restriction above).
+
+***March 5
+
+*The information area has been cleaned up a little.
+
+***March 1
+
+*(Internal) I've cleaned up the Glyph code, which is used to put objects on
+the screen.
+
+*(Internal) Glyphs can now accept mouse clicks.  I will use them in
+the future to create buttons to replace the toolbar, which is using
+the OS/2 "ValueSet" control at the moment.
+
+*(Internal) I've added glyph overlaying, where one glyph can go on top
+of another glyph.  Buttons will use this, as they are a text or bitmap
+glyph on top of a button glyph.
+
+*When dragging the mouse, I'm using mouse capture mode.  This should
+fix some of the bugs with mouse dragging.
+
+***January 31
+
+*The flood command has been fixed; it now always causes a flood.
+
+*Water can flow off the map; as far as water is concerned, there is no
+longer an artificial wall around the edges of the map.
+
+
+***January 26
+
+*I added a scrollbar class to handle the two scrollbars; they've
+been made narrower, and they were moved inside the statusbar.
+
+*The text that goes in the statusbar will be clipped if necessary.
+
+*Non-immediate drawing (where you draw a line) shows a preview of
+what will be drawn.  For example, if you're drawing roads, it will
+show the roads that are being drawn.
+
+*The View options now affect the world map; previously they only
+had an effect on the map view.
+
+
+***January 22
+
+*A bug with scrolling when the "View" menu is pulled down has
+been fixed.
+
+*Scrolling behavior has been improved, both for PM and for DIVE;
+most of the changes have to do with scrolling by clicking or
+dragging the mouse on the world map.
+
+*The auto-build mode behavior has improved in some ways, but still
+needs a lot more improvement.
+
+
+***January 19
+
+*A lot of things have been changed to speed up the 
+simulation code.  Some of this is due to extensive profiling;
+other speedups are due to a change in the way the map is 
+scanned for each part of the simulation.
+
+*Before building a farm, farmers look near a plot of land to see 
+if there is a lot of food available in the area.  If there is a
+surplus of food, they are less likely to build a
+farm. Similarly, people are less likely to build houses if
+there are a lot of unemployed people nearby.
+
+*If there is a shortage of food in an area, a farm is more likely
+to be built; if there is a shortage of labor, a house is more 
+likely to be built.
+
+
+***January 13
+
+*I fixed a bug with the new palette system that would cause problems
+if the palette manager was not available.
+
+*Farms now produce food.
+
+*Food is transported along roads to houses.
+
+*An excess of food at a house tends to increase the population there;
+a shortage of food tends to decrease the population there.
+
+*The food produced and consumed is displayed in the information area
+on the left side.
+
+*To use DIVE, run <CODE>SIMBLOB DIVE</CODE>.
+
+*The statusbar now shows more performance information:
+<OL>
+  <LI> <EM>Ticks per second:</EM>  
+       The number of times per second the simulation code runs.
+  <LI> <EM>Frames per second:</EM>
+       The number of times per second the window is drawn.
+  <LI> <EM>MPixels per second:</EM>
+       Millions of pixels drawn each second.
+</OL>
+Please be careful when comparing different drawing techniques
+(such as PM vs. DIVE).  To redraw a small part of the window with
+DIVE, the entire window must be redrawn.  Non-DIVE drawing can
+draw only the area that needs to be drawn.  As a result, when using
+DIVE, the MPixels per second number will be higher, because more 
+pixels have to be drawn to the window.  However, since many redraws
+don't have to draw all the pixels, PM drawing can be faster.  The
+frames per second code is a better indicator of drawing speed, but
+it is hard to use that as a comparison, because the number will vary
+depending on what is being drawn and what part of the map you are
+viewing.  For example, if the window is over an empty area of the map,
+few pixels need to be drawn so PM gets a high frames per second value.
+Also it's hard to tell what is going on with graphics speed because 
+SimBlob uses so much CPU time for simulation code.
+
+*The Speed menu is a little different:
+<OL>
+  <LI> The speeds associated with Slow, Medium, and Fast are 
+       slightly higher.
+  <LI> There are two Zoom options.  Zoom Ticks is designed to
+       maximize the ticks per second speed -- your world will
+       run as fast as possible.  Zoom Frames is designed to
+       maximize the frames per second speed -- you will see
+       more (small) changes to the map.
+</OL>              
+
+*Periodically, the rivers will flood.  (Inspired by the recent
+flooding in the Western U.S.)
+
+*A new Deity menu option allows you to trigger a flood.
+
+
+***January 9
+
+*I fixed a major bug with resizing that I introduced with the January
+6 version; it was caused by the Blitter objects not knowing when the
+window was resized.
+
+*I've added support for DIVE, as a Blitter object.
+
+*The map creation messages are now displayed on the statusbar.
+
+
+***January 6
+
+*I've rewritten the palette system, and it <em>should</em> work
+pretty well now on 256-color systems (especially when Netscape
+or other palette-stealing application is running).
+
+*(Internal) I've separated out the code that blits ("draws") to the
+screen.  These "Blitter" objects allow me to write the painting 
+procedure without referring to any specific kind of blitting.  The
+initial two Blitter objects use GpiDrawBits and WinDrawBitmap.
+
+*(Internal) I've started adding support for DIVE, as a Blitter object.
+
+*There is a money indicator on the statusbar, and it goes down
+when you build certain structures.
+
+***1996
+
+***December 30
+
+*The water display system has been rewritten to use the new
+display system; this should result in faster simulation code
+and also faster display code.
+
+*The fire animations use the new display system instead of
+an ugly hack that they used before.  This also fixes a bug
+where fire animations would stop unexpectedly.
+
+*There's now a Options/View menu that lets you control what can
+be seen on the main map view.  You can hide various parts of the
+map, but not blobs or text (for now).  I'm not sure if this is
+of any use.
+
+*The information area and status bar have a textured background.
+
+
+***December 28
+
+*(Internal) The automatic layout system has been extended to work with the
+new display system.
+
+*Fixed a crash that would occur after several window resizes
+(including maximize/minimize).
+
+*The information area on the top left now uses the new display
+system; the text in the new display system doesn't yet support
+right-justification, so the information area and statusbar
+look weird.
+
+
+***December 27
+
+*The statusbar uses the new display system, so you will see
+anti-aliased fonts and shadows there.
+
+*You can now drag the mouse around on the the world map
+to move the view to that area.
+
+*(Internal) A few things were fixed in the automatic layout system.
+
+
+***December 26
+
+*(Internal) The font format has changed; instead of Data\Text12.RLE the
+file is Data\Font12.RLE.  You can erase the old Text*.* files
+now.
+
+*After a fire burns out, the ground is burnt; you can clear it
+out with the erase tool, or you can wait for it to clear on its own.
+
+*There are new fire bitmaps; I am still looking for better ones.
+
+*When you jump-scroll from one screen to the next, a small part of
+the map remains so that you can orient yourself.  (Previously,
+the entire screen changed so that you saw all new hexes.)
+
+*(Internal) There are a lot of changes to make font handling easier.
+
+*(Internal) A new layer has been written for text objects so that
+text can be easily overlaid on top of the map.
+
+
+***December 23
+
+*(Internal) The sprite blit system has been sped up and made
+more flexible. (I now perform better clipping checks before 
+blitting so that I can
+determine whether I should blit everything without clipping, or
+blit nothing, or blit with clipping.)    Using C++ templates, I 
+have 12 diferent versions of the blit routine, each optimized
+by the compiler, instead of having one version with lots of flags
+controlling how the blit is performed.
+
+
+***December 20
+
+*(Internal) So far, the map and blob layers have been implemented 
+for the new display system.  (As of Dec 16, only the map layer was 
+implemented.)  The layers have been put into separate modules.
+
+*(Internal) I have designed and partially implemented a new display
+system.  Previously, I was using hexagons to determine which parts of
+the screen needed to be redrawn.  Each hexagon was marked 'clean' or
+'dirty', and all the dirty hexagons were drawn.  The problem with this
+approach is that some of the overlays (such as blobs) are not
+hexagons; I was handling that by marking the hexagons near and under
+the blob as dirty.  Some of you may have seen the bridge drawing
+problem, where water would show up through bridges.  This was also an
+artifact of the dirty hexagon system.<P>
+
+The new system is structured instead as a set of rectangles
+(<code>HRGN</code> for OS/2 programmers).  Also, there are multiple
+layers of overlays instead of all the drawing code being in one huge
+routine.  The map is drawn at the bottom, then water, then bridges,
+then blobs, and finally any textual messages. <P>
+
+The advantages over the old system are:
+<OL>
+  <LI> Smaller pieces of code are more easily maintained.
+  <LI> It should be possible to turn layers on and off
+       individually.
+  <LI> Oddly shaped items such as bridges can be drawn correctly.
+  <LI> Transparency is handled correctly.  Previously, it
+       was possible for a transparent bitmap to be drawn twice
+       in the same place, so that it showed up opaque.  The
+       old solution is to force a much larger redraw
+       than necessary, but the new system can handle transparency
+       so it won't be necessary to draw so much.
+  <LI> I will be able to handle overlay text properly.  (In
+       the old system, anything that was larger than a hexagon
+	      could not be drawn reliably.)
+  <LI> I can place user-interface gadgets on the map as well, 
+       like buttons or menus.  Since I can do this, I will
+	      change the status area on the left and the status bar on
+	      the bottom to use this system as well.
+</OL>
+
+The new system also includes:
+<OL>
+  <LI> "Picking" (which I had implemented as a separate module
+       and then lost)
+  <LI> Support for non-map layers for user-interface controls
+  <LI> Irregularly shaped user-interface controls
+</OL>
+
+
+*A bug with automatic building was fixed; it led to strange effects
+such as building of bridges inside canals.
+
+*There is now an "About SimBlob" dialog box in the Help menu, which
+has been moved over to the right side of the menubar.
+
+*The "About SimBlob" dialog shows the date of the last compile, and
+also the URL for the SimBlob web page.
+
+
+***December 10
+
+*The blob builders can sense fires several spaces away and move to
+extinguish them.
+
+
+***November 30
+
+*I am implemented a workaround for systems that do not have a working
+GpiDrawBits.  Thanks to Peter Nielsen for the the technique!  To use
+the workaround, run <CODE>SIMBLOB ALTBITMAP</CODE>.  It will draw much
+slower, but it's better than not drawing at all.
+
+
+***November 29
+
+*The farms now go through many stages, from 'planting' to
+'harvesting'.
+
+*Blob builders now put out fires.  If they see a fire next to them,
+they'll move to put it out.  They don't look farther than that,
+however.
+
+
+***November 17
+
+*The map now remembers which blob is at each location.
+<OL>
+  <LI> If another blob attempts to move there, it is blocked.
+  <LI> Path-finding code treats nearby blobs as obstacles. I
+       assume that if the other blob is nearby, it won't 
+       move out of the way in time for this blob to go there.
+  <LI> Path-finding code treats all stationary blobs as
+       obstacles.  I assume that if the other blob isn't
+	      moving, it's more likely that it will stay there than
+       move.
+</OL>
+
+*A "B" is shown on the hex where blobs start.
+
+*If there is a volcano erupting, the world map will display the word,
+"Volcano".
+
+*If a blob is blocked as it is walking, it will wait for a while
+before finding a new path around.  This is useful when the blob is
+being blocked by something that is likely to move soon.
+
+*(Temporary) Blob soldiers are drawn as blob builders, and will walk
+around not-so-randomly.  (I am using a swarm algorithm; ask if you're
+interested in details.)
+
+*(Temporary) A shadow will fall in front of a blob soldier who is
+walking.
+
+
+***November 4
+
+*If you use the Shift key while drawing, it will reverse the sense of
+the line-drawing mode.  Roads, Walls, Canals, and Bridges are normally
+drawn as lines; Fires, Trees, Eraser, and Gates use freehand drawing
+mode.  If you use Shift, it will use the other mode.
+
+*If you use the Ctrl key while drawing, it will use the Eraser tool
+instead of the tool you have selected.  Ctrl can be combined with the
+Shift key to erase in straight lines.
+
+
+***November 1
+
+*The water graphics are slightly different; I've changed the way water
+is drawn in order to improve the bridge redrawing.
+
+*Auto-build mode is more likely to build straight bridges.
+
+*When walls and canals are drawn next to each other, the graphics are
+merged.
+
+*The world map has a small box showing what area is being displayed in
+the main view.
+
+*You can left-click on the world map to move the view to that
+location.  There are still some bugs in the redisplay.
+
+*Terrain generation includes some volcanic activity.
+
+
+***October 26
+
+*Springs now have an "S" on them.
+
+*There are now bridges!  Unfortunately, I still haven't figured out
+how I want to handle bridges.  Right now, they won't display properly,
+and you can build any shaped bridge anywhere.  (It doesn't have to be
+straight, and it doesn't have to be over anything.)
+
+*There are more options in the Erase submenu, to erase only certain
+kinds of things from the map.
+
+*If the blobs want to build a road somewhere, but there is a house or
+farm there, the blobs owning the house or farm might vacate.
+
+*(Internal) Some more possibilities of thread deadlocks were removed.
+
+*The colors on the world map more closely match those on the
+main view.
+
+
+***October 22
+
+*The wall graphics are now textured gray rather than flat gray with a
+pink border.
+
+*The buttons on the left side of the window are replaced by population
+and job information.  The numbers in parentheses are the percentage of
+people working and the percentage of jobs that are filled.
+
+*The cursor flickers much less now.
+
+*There are now more sources of water than before, and they can be
+anywhere on the map, rather than only one per quadrant.
+
+*During map creation, the world is flooded.  This is an attempt to
+create erosion channels.
+
+
+***October 18
+
+*Towers are now Gates.  They allow a small amount of water to flow
+through.  With gates, you can build a dam that has water flowing
+through the front.  I find that three gates allows enough water to
+flow to produce a decent river.
+
+*The world map updates more often if there is a volcano on the map.
+This slows down the game as well.
+
+
+***October 16
+
+*Water flow rules and erosion has been changed yet again; this time,
+I'm happier with the resulting world after 500,000 ticks, but I'm
+still unable to get the rivers to stabilize.  On the other hand,
+perhaps it is better that the rivers change course often -- players
+will have to control the rivers with canals and walls.
+
+*I have reimplemented automatic window layout (see the what's new
+entry for July 28 for details).  I have not yet made the scrollbars
+use this.
+
+*In preparation for various information being displayed on the left
+side of the window, I have added a static control.  Currently it shows
+"SimBlob", but eventually it will have information such as money,
+population, and employment.
+
+*The button for "erase" has been changed to match Warp 4's close
+button.  The button for roads has been recolored so that it matches
+the road color on the map.
+
+
+***October 11
+
+*(Internal) A problem with threads locking up has been worked around.
+
+*The house graphics have been made larger.
+
+*The road graphics now have divider lines in the center.
+
+*The terrain graphics are rougher and a little more textured.
+
+*There are now thirteen months with twenty-eight days in each.  The
+thirteenth month is the Holy Month, when the blobs hold religious
+ceremonies.
+
+*Fires are animated.
+
+*Water flow rules and erosion have been changed again.  I'm still
+searching for something that will give rivers rather than lakes.
+
+*Terrain generation now includes volcanic eruptions.
+
+*The initial map includes forests, rather than just isolated
+trees.
+
+*A bug with "disappearing water" has been fixed.  Water no longer
+disappears except by evaporation.
+
+
+***September 27
+
+*The seasons menu has been removed.  Seasons now change
+automatically.
+
+*A major bug with window resizing has been fixed (again).
+
+*The scrolling has been improved.  For all the programmers out
+there, here are the details:
+<OL>
+  <LI> WinScrollWindow gives you a dirty rectangle that should
+       be redrawn.  I was using this rectangle to draw my
+       internal buffer, and then blit it to the screen.
+	      Instead, I now use it only to blit to the screen, and I
+	      determine what needs to be drawn to the buffer by
+	      looking at what would be uncovered by the scroll
+	      operation.  (One edge of the window needs to be
+	      redrawn.)
+  <LI> I moved the WinScrollWindow operation to the very
+  	      <I>end</I> of the paint routine.  This minimizes the time
+	      after the scroll but before the painting of the exposed
+	      area.  Scrolling feels much smoother now because you
+	      don't notice the redrawing of the exposed area.
+</OL>
+
+
+***September 25
+
+Most of the changes are internal to redo some of the things I've lost.
+I've listed only the external changes.
+
+*Lines are drawn straight when you draw a road, wall, or canal.
+
+*The Drought menu option should now work; it turns off water
+sources completely.
+
+
+***July 28
+
+<B> Note: </B> These changes were lost in a hard disk crash. <P>
+
+*Minor bugs with mouse dragging were fixed.
+
+*Minor bugs with mouse dragging were introduced.
+
+*There are two independently scrolling View windows.
+
+*The terrain bitmaps have been fixed.
+
+*You can drag from one window to another to draw "across the
+map".
+
+*The tree graphics have been changed, and young trees
+are drawn smaller than full grown trees.
+
+*(Internal) Changes to the internals:
+     <UL>
+ <li> The main window is laid out "automatically" using
+      Layout algorithms.  The layout objects can set up
+      components Horizontally or Vertically, and a component
+      can be another Layout, a fixed space, a variable space,
+      or a window (or control). <P> Now I don't have to 
+      compute the coordinates of each of the controls, so
+      it's very easy to add new ones.
+ <li> The scrollbars are now part of the main window instead
+      of part of the frame window.  OS/2's frame window has
+      flags to create two scrollbars, but I wanted four, and
+      I also wanted to control their size and placement.
+ <li> The statusbar uses the "Subject-Observer" design
+      pattern [also called Model-View-Controller] instead
+      of the more traditional object interface.  <P>
+
+      This is very helpful because various parts of the
+      program only have to know about Subjects -- they don't
+      have to be aware of where the subject data will be
+      displayed (a statusbar), so I can move the display to
+      another control (like a static text control or titlebar)
+      without requiring any changes in all the clients.  Also,
+      since StatusBar relies on PM, this will allow me to write
+      modules are <B>not</B> dependent on PM in any way.
+ <li> I'm going to make the scrollbars use Subject-Observer
+      so that the view window, the keyboard interface, and
+      the scrollbar all look at a common (consistent) map
+      position, instead of all three trying to update each
+	     other to maintain consistency manually.  Subject-Observer
+      requires less code and is more flexible than the
+	     traditional object interfaces.  I should write a web
+      page about SimBlob's internals sometime, but things
+      are changing so fast right now that I think I will wait
+	     until the internals stabilize.
+     </UL>
+
+ 
+***July 22
+
+<B> Note: </B> These changes were lost in a hard disk crash. <P>
+
+*The Speed menu now includes options for using DIVE.  Temporarily,
+DIVE is required, even if you have it set to 0%.  Testers have
+reported that 50% DIVE works well, and 100% DIVE slows down
+scrolling too much.
+
+*The right mouse button now controls Picking instead of soldiers.
+It reports what is under the spot at which you clicked, but it
+does not yet take into account water or blob soldiers.
+
+*The house graphics have been made larger.
+
+*The road graphics now have divider lines in the center.
+
+*The terrain graphics are rougher and a little more textured.
+
+
+***July 10
+
+<B> Note: </B> These changes were lost in a hard disk crash. <P>
+
+*The terrain drawing behavior has been rewritten.  Internally, 
+each terrain type on the toolbar is associated with a Tool object
+that controls the appearance and behavior of the tool.  This will
+make it easier to add new types of tools that do <I>not</I> draw
+terrain to the map.
+
+*The mouse drag behavior (when drawing certain types of terrain)
+has been improved.  You can now cancel a drag by moving the mouse
+pointer outside the window.
+
+
+***July 7
+
+*I've completed the conversion to GpiDrawBits.
+
+*I've implemented transparent bitmaps, and to see how they look,
+I implemented the marking (when you drag with the mouse to draw
+roads or walls) with a transparent bitmap.
+
+*The layout has been changed.  There is a panel on the left with
+various controls and displays, and a map on the right.
+
+*There is a world map in the lower left side.
+
+*The world map updates while the map is being created.
+
+*A major bug with resizing windows has been fixed.
+
+*The algorithm for "Auto Build" mode has been updated to make
+road builders stay away from walls and water.
+
+*Thanks to IBM's Performance Analyzer, SimBlob runs faster,
+even though the map is more than twice as big as before.
+
+
+***June 15
+
+*I've been rewriting the graphics system to be faster and use
+less memory.  I'm now using GpiDrawBits instead of GpiBitBlt;
+it lets me use my own bitmap formats, and also opens up a
+path to DIVE.
+
+*The blob soldiers are now drawn with blob bitmaps instead of
+little rectangles.
+
+*There is now a nicer startup screen.
+
+*There is a little blob on the bottom left of the main window.
+
+*The pushbuttons are now "Volcano" and "Rain".
+
+*Volcanos produce lava, which raises the terrain (when it hardens).
+
+*A "terrain equalizer" has been added to keep a good distribution
+of altitudes.  If there are too many high altitudes, it lowers
+some of them; if there are too many low altitudes, it raises
+some of them.  This keeps the map from being too boring -- either
+too high, too low, or too flat. 
+
+To try this out, start up several
+volcanos to fill in all the green areas.  Set the speed to Zoom
+and watch the brown slowly turn green.
+
+
+***June 1
+
+*The terrain mode toolbox has been moved inside the main window.
+To do this, I rewrote the class lirary I was using for PM
+windows.  I'm also testing this new class library by adding
+pushbuttons inside the main window.
+
+*Two pushbuttons allow you to increase and decrease the amount
+of water that flows from the springs.
+
+*You can now place "canals", which look like inverted towers.
+They are the opposite of walls -- they are dug 40 feet deep,
+and can be used to channel away floodwater or to divert rivers.
+Since the bottom of a canal is concrete, there is no erosion.
+
+*When the window is not active, the paint thread gets idle
+priority, which speeds up the game and other applications.
+
+
+***May 30
+
+*The farm and cursor colors have been changed again.
+
+*I'm trying out better water graphics.  They show the depth of
+the water as well as the average depth between two hexagons;
+the result is that lakes and rivers look smoother.  (There are
+also 64 levels of water now, instead of 6.)
+
+*(Internal) A lot of internals have changed.  Soon I hope to have support for
+multiple views.
+
+*The dragging graphic has been changed from a partial outline to
+a shaded hexagon.
+
+
+***May 26
+
+*The house colors have been changed to dark gray for empty and cyan
+for full.
+
+*The farm graphics are different, once again.  (But not better!)
+
+*Trees are more likely to grow near rivers.
+
+*I'm trying out some experimental water graphics.
+
+*You can now draw roads and walls by dragging a line from one place
+to another.
+
+*Wall graphics are slightly better.
+
+
+***May 20
+
+*The house graphics are better.
+
+*The farm graphics are different, not necessarily better.
+
+*I've started to work on the economic simulation.  Houses provide
+labor, and farms provide jobs.  There's just a question of how to
+link labor up to jobs.  Right now, they try to move along roads
+to find work.
+
+*The status bar shows statistics about the job market.
+
+*Houses will empty out if the residents can't find jobs.
+
+*I'm really starting to consider using DIVE for this game ...
+
+
+***May 10
+
+*The tree and tower graphics are better.
+
+*Trees die out after some time.  Trees on mountains are more likely
+to die early than trees in lowlands.
+
+*Farmers prefer areas near a source of water.
+
+*The scrolling speed has been improved a little.
+
+*The Speed menu has checkmarks to show what speed is set.
+
+*The status bar shows ticks/second.  (A tick is a unit of time
+for the simulation.)  I get between 8 and 10 ticks/sec in Zoom
+mode on my 486/66.  I hope to improve that speed a little.  :)
+
+*The thread priorities have been adjusted.  During startup, the
+system should be more responsive while the map is being generated.
+The painting has been assigned a higher priority thread so
+that it can respond quickly.
+
+
+***May 5
+
+*The toolbar is outside the main window so that it doesn't block your
+view.
+
+*I rewrote the scrolling system, so that it's much faster!
+
+*Erosion works better now.  In addition to low terrain eroding fast,
+soil with lots of moisture will erode faster.  (Areas near a river
+or lake erode quickly.)
+
+*It's now harder to build a wall underwater.
+
+*The water-flow algorithm is new -- it allows rivers to be wider than
+one hex wide.
+
+
+***April 21
+
+*The toolbar is cleaner so that it's easier to see which tool is chosen.
+
+*Forests grow when trees spread seeds around.  Plant a tree and watch
+a forest grow from it.
+
+*Houses are now like farms -- they will spring up around roads.
+
+*If houses are underwater too long, they will eventually be destroyed.
+(Previously, blobs would move out but the houses would remain.)
+
+*Fires can burn trees, houses, farms, and roads.
+
+*There is a new option on the Special menu to erase only soldiers.
+
+*The terrain graphics have been updated to look better.
+
+*Rivers pick up sediment upstream and deposit it downstream.  This
+leads to interesting behavior that is matched in nature.  If you
+start out with a straight river on mostly-level terrain, the sediment
+will build up and cause the river to "meander".  Some of the variables
+still need to be adjusted a bit; the buildup on the banks can be a bit
+too much at times.
+
+*Erosion behavior is different -- low terrain erodes heavily now.
+
+*The scrollbar behavior is erratic.  I'm still trying to get scrolling
+to work properly in the new screen painting routines.  I'm considering
+using DIVE, which would solve all my painting problems.  <code>:)</code>
+
+
+***April 13
+
+*There is a toolbar on the bottom left that lets you choose type
+type of terrain to draw.  This interface will change
+eventually, but this one is really easy to program, so I
+decided to put it in until there's something better.
+
+*There are now lots of blob soldiers.  Every time you
+right-click somewhere, a new soldier is created to walk there.
+There is no way to make that soldier do anything else (for
+now).  You can do fun things this way -- pick an area of the
+map and start right clicking everywhere, and an entire army
+will be created to walk to that area.
+
+*There is a new menu with some neat effects: Rain, Army, and
+Erase.  Rain creates lots of water all over the map.  Army
+creates a hundred soldiers to go to random places on the map.
+Erase erases all soldiers and structures.  <b>WARNING</b>: Do
+not use Erase while soldiers are moving, or there may be a crash.
+
+*The different levels of path approximations let me experiment
+with tradeoffs in the <a href="../gameprog.html">A*
+algorithm</a> for finding shortest-paths.  Best finds really
+good paths; Fast finds paths quickly but they're not very
+accurate.  In particular, Fast tends to ignore roads.  It also
+does really badly if there are obstacles -- I'm still trying to
+debug this.
+
+*There are a lot of redraw problems.  I restructured the
+program's paint loop to speed things up, but scrolling doesn't
+work very well yet.  Also, when the blobs move around, they
+sometimes leave garbage behind.
+
+*Lots of path-search statistics are printed at the bottom after
+you assign a destination to a blob soldier.  You can ignore
+these if you want.  :) Steps tells you the number of hexes the
+blob will step through.  Scan tells you how many hexes the A*
+algorithm searched to find the path.  Cost tells you the amount
+of time it takes to walk that distance.  The algorithm is
+currently set up to find the least cost path.  You can compare
+the path cost to the approximation level -- Best gives you the
+least cost and Fast gives you the highest.  
+
+
+***March 8
+
+(It's been a long time!)
+
+*The blob soldier causes fewer redraw problems as he moves.
+
+*There are more terrain levels, giving more information about altitude.
+
+*Roads now offer double the normal movement rate for blob soldiers.
+
+*A bug with the soldier bouncing off a wall repeatedly when the
+wall spot was his goal .. was fixed.  Now he will stop if the
+goal cannot be reached.
+
+*I added some more erosion back into the game.  High altitudes
+erode less than middle altitudes.  Low altitudes have medium
+erosion.  
+
+
+***1995
+***December 16
+
+(I was on vacation from December 17 to January 9.)
+
+*Scrolling is much faster, but it doesn't always look right.  I
+think this is because another thread is drawing while I'm scrolling;
+I need to fix this someday. :)
+
+*I've disabled erosion because I get much more interesting terrain
+without it.
+
+*There is now a blob that can move around on the map!  Use the right
+mouse button to select a target for the blob.  He will try to avoid
+moving uphill when possible and he can't travel through walls.  If
+the path he selects later has a wall on it, he will recompute a new
+path.  (Eventually, the blob will continuously update its path 
+depending on new terrain conditions; this will be a background
+thread.)
+
+*I think the last of the purple-splotch bugs has been fixed.  There
+was a problem in 16-bit modes because SimBlob assumed that purple
+(255,0,255) existed in the palette, but in 16-bit mode, it doesn't.
+
+
+
+***November 21
+
+(School is still keeping me busy!)
+
+*I think water is flowing pretty well now.  There are still some
+places it needs to be improved -- for example, sometimes it's 
+wider than I would expect, and there are still gaps in the flow.
+
+*Transparent bitmaps <bold>should</bold> work now, on all video
+drivers!  This has taken a long time to get working properly,
+because the `easy' way (marking one color `transparent') does
+not work on all drivers, and the `hard' way (making a separate
+mask bitmap) needed to be done automatically.  I am generating
+all the roads, walls, and houses instead of drawing them by hand,
+so I had to make all the routines produce a separate mask and
+image instead of a bitmap with a transparent color.
+
+*The File menu was split up into the File and Speed menus.
+
+*A new menu was added that will eventually let you pick which terrain
+to draw.  It currently does nothing.
+
+*A new `trees' tile has been added, but it doesn't do anything
+yet.  I will probably turn this into several levels of forest
+(light, medium, dense) later.
+
+*All the bitmaps are now in the executable, instead of being
+generated at the beginning of the game.  This greatly reduces
+startup time!
+
+*The huge executable size reflects the size of the added bitmaps.
+Right now, they're all stored in 24-bit format, but I will soon
+convert them to 8-bit to save space.
+
+*Erosion is disabled.  I needed to do this to get the rivers to
+work properly.  I want to add erosion back in, but I have not
+yet determined how I should do this.
+
+
+***November 5
+
+(School has kept me busy, so I haven't worked on SimBlob a lot.)
+
+*A statusbar has been added, but it doesn't show anything right now.
+You <em>can</em> do some fun things to it, like drag FG/BG colors
+or fonts to it.
+
+*I spent a lot of time on getting water to flow properly, but it
+doesn't want to cooperate.  I might just give up on this, and use
+a static water model, like SimCity and Civilization.  :(
+
+*Towers are like walls in the current simulation, but once military
+units are added, they will be able to use towers for better defense
+than walls provide.
+
+*A minor bug in house display was fixed -- the seventh house would
+not get highlighted.  (I was using a less-than test instead of a
+less-than-or-equal-to test!)
+
+*The terrain is randomly generated now.  I've been experimenting with
+various terrain generation algorithms.
+
+*The File menu has several options for changing the speed of the
+simulation.  (Yes, I know, I know -- this should be in a Speed menu!)
+
+*(Internal) I've taken some steps towards making "multiple views" possible.
+Once multiple views are possible, you will be able to open several
+map windows and view different parts of the map at the same time.
+They will all stay synchronized.
+
+*The transparent bitmap display <em>still</em> does not work for most 
+users.  This is mainly because I haven't worked on it yet -- I do
+have several options in mind, but I haven't decided which method to
+use.  I don't want to choose one method and then later decide to use
+another, so I'm considering my options carefully.
+
+*If you resize the window large enough, the scrollbars <em>should</em>
+disappear.  This is flaky right now -- sometimes they don't disappear,
+and sometimes they disappear and won't come back.
+
+
+***August 20
+
+*The game is faster and some redraw bugs have been fixed.
+
+*You can now build residential areas.  Up to 7 homes can be
+in each hex.  People will move in automatically, and the
+gray (empty) homes will turn into red (full) ones.
+
+*(Internal) Some of the redrawing code has been rewritten.  If you see any
+redraw problems, please let me know!  Bright purple is my error
+color -- if you see it, you know there's a problem.
+
+*The map initialization is done in a separate thread instead of
+in the main one.  The window will come up faster now, but it
+still takes a while before the map appears.
+
+
+***August 7
+
+*The game is much faster!  I restructured the redrawing code, and
+it got much faster, but it still needs some redraw bugs fixed.
+
+
+***August 5
+
+*<A NAME="layered"><strong>Layered Terrain</strong></A>: 
+There are three levels of tiles
+instead of just one.  The bottom layer is the altitude indicator:<br>
+<IMG SRC="hex2grass.gif" ALT="[wet grass]">
+<IMG SRC="hex1grass.gif" ALT="[dry grass]">
+<IMG SRC="hexdirt.gif" ALT="[clear area]">
+<IMG SRC="hex1hill.gif" ALT="[low hill]">
+<IMG SRC="hex2hill.gif" ALT="[high hill]">
+<IMG SRC="hex1mountain.gif" ALT="[low mountain]">
+<IMG SRC="hex2mountain.gif" ALT="[high mountain]">
+<br>
+The middle layer has structures:<br>
+<IMG SRC="hexfarm.gif" ALT="">farm,
+<IMG SRC="hexroad.gif" ALT="">road, and
+<IMG SRC="hexwall.gif" ALT="">wall.
+<br>
+The top layer has water:<br>
+<IMG SRC="hexwater.gif" ALT="[water]">
+<br>
+The main effect of this is that you can now have multiple things
+on a single tile.  Previously, if there was a wall, the grass
+would not be displayed, and only a wall on a gray tile.  Now the
+wall is shown on top of grass.  If there is water, you can partially
+see what's underneath.
+
+*Farms will automatically spring up around roads.
+
+*Farms are destroyed by water.  (They're not Rice Farms.)
+
+*Roads and Walls can be destroyed if covered by water too long.
+
+
+***August 3
+
+*The terrain now has a hill on the left and a valley on the right.
+
+*Erosion does seem to work, but I'm not sure if it's realistic.
+There are ways to manipulate it.  :)
+
+*There are now different colored tiles for different altitudes:
+green is low; brown is medium; gray is high.
+
+
+***August 2
+
+*The terrain is now a bowl-shape instead of an inclined plane.  This
+causes the water to flow into the middle.
+
+*Simple erosion is implemented.  Sediments will flow along with the
+water.  To see the effect of this, just start the program and let
+it run for a while.  The lake starts to fill up with dirt, and it
+gets wider.  Or is the effect of having more water?  :)  I don't know!
+Another way to see this is to force the river into some path, and
+later take away the walls.  Some of the time you will see that the
+river has eroded away a path for itself and it will not return to
+its original path.
+
+*Walls are 100 inches high instead of 1000 inches.  This makes overflows
+much more likely.
+
+
+***July 29
+
+*There are now scrollbars that seem to work.  The display is
+a little bit slow; I am working on speeding this up.
+(Note:  The pageup/pagedown and lineup/linedown parts don't
+ work yet, but you should be able to drag the scrollbutton
+ around.)
+
+*The game is running a little slower than it should because
+the entire map is drawn instead of just the part that's visible.
+
+*The menu has a "Color Edit" option that brings up a color palette.
+You can drag a color from the palette to the game to change the
+color of the standard controls (titlebar (active & inactive), 
+menu, system menu, scrollbar, and frame (active & inactive)).
+
+*Use the left mouse button to toggle the terrain in one direction
+and the right mouse button to go in the other direction.  This won't
+be there for long, because the right button will be used to bring up
+a context-sensitive menu for the object(s) under the mouse.  The most
+likely interface will be the user selecting a tool (road, wall, farm,
+etc.) and then selecting areas to build the item.
+
+*The window can be resized and things <em>should</em> look right.
+
+

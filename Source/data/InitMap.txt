@@ -1,0 +1,65 @@
+# This file controls how the map is created
+# Lines beginning with `!' are commented out commands
+
+# Don't edit this file in the Data/ subdirectory.  Instead, copy it to
+# the main SimBlob directory and edit it there.  The Data/.. file is
+# the default, and will be replaced when you download a new version of
+# the game.
+
+# Note that the first time you run SimBlob after editing these settings,
+# the percentage-complete indicator on the status bar might be inaccurate.
+
+# These are experimental
+random-mountains
+random-ridges
+random-ridges
+random-ridges
+
+# This will flatten the map instead of using an initially random map
+!flat-map
+
+# Commenting this out is strongly discouraged
+rescale-map
+
+# Highly recommended
+great-flood
+
+# Continental uplift is experimental at this stage
+!uplifting
+!uplifting
+!uplifting
+
+# This will move the water sources to higher elevations
+find-water-sources
+
+# Once the water sources have been found, this will put mountains near springs
+increase-mountains
+
+# This will put volcanos near springs
+!volcanic-activity
+
+# Comment this out to speed things up (yes, you can do things more than once)
+soil-erosion
+soil-erosion
+soil-erosion
+
+# Comment this out to generate worse rivers
+dig-rivers
+
+# This is recommended but not required
+renormalize-terrain
+renormalize-terrain
+renormalize-terrain
+super-soil-erosion
+renormalize-terrain
+super-soil-erosion
+renormalize-terrain
+super-soil-erosion
+
+# This is recommended but not required
+add-forests
+
+# Make the water flow down to lakes
+water-flow
+water-flow
+water-flow

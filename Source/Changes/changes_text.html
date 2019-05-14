@@ -1,0 +1,373 @@
+<html>
+<head>
+<title>SimBlob: List of Recent Changes</title>
+</head>
+<body>
+<h1>List of Recent Changes</h1>
+<h3> 3 August 1998 </h3>
+
+
+<UL>
+  <LI> (Internal) Worked on the path-finding code.  I'm investigating better data
+structures to use, which would speed up path-finding.  If I get them
+to work, I will post the new path-finding code on my Games Programming
+page.
+
+
+</UL><P>
+<h3> 1 August 1998 </h3>
+
+
+<UL>
+  <LI> Changed the world map so that you can no longer drag the highlight
+rectangle off the top or right edge.
+
+
+</UL><P>
+<h3> 29 July 1998 </h3>
+
+
+<UL>
+  <LI> (Internal) Worked on the path-finding code.
+
+
+</UL><P>
+<h3> 27 July 1998 </h3>
+
+
+<UL>
+  <LI> Converted the display of altitudes and water depths to the metric system.
+
+
+</UL><P>
+<h3> 26 July 1998 </h3>
+
+
+<UL>
+  <LI> Added a context menu to the World Map that allows you to change the
+type of view: normal (terrain, roads, water, trees), terrain (water,
+trees, and shaded terrain), and civilization (roads, water, houses,
+farms, markets).  To some extent, the "View" menu (from which you can
+control whether roads, structures, water, etc., are drawn) will
+control what is drawn on the World Map too.  On the Civilization view,
+markets are bluish green, houses are red, and farms are purple.
+
+
+</UL><P>
+<h3> 24 July 1998 </h3>
+
+
+<UL>
+  <LI> Tweaked the market/house/farm placement algorithm some more.
+
+
+</UL><P>
+<h3> 23 July 1998 </h3>
+
+
+<UL>
+  <LI> Changed the erosion algorithm to take rivers and lakes into account.
+Since water flow already has erosion built in, the soil erosion is
+made weaker for watery areas.
+
+
+</UL><P>
+<h3> 22 July 1998 </h3>
+
+
+<UL>
+  <LI> Improved the food/labor algorithm to make food and labor flow from
+market to market more easily.  It still needs more improvements.
+
+
+</UL><P>
+<h3> 20 July 1998 </h3>
+
+
+<UL>
+  <LI> Fixed a bug with the food/labor algorithm.
+
+
+  <LI> The Diety option, "Build Roads", now is biased towards building roads
+on an invisible grid of hexes.
+
+
+  <LI> The Diety option, "Build Roads", now builds both bridges and roads.
+
+
+  <LI> On the World Map, water was previously displayed on top of bridges.
+Now, bridges will be on top of water.
+
+
+  <LI> Improved the food/labor algorithm to be more "fair" -- it was giving
+more food and labor to farms and houses on the southwest side of a
+farm.  (Many of my algorithmsscan from southwest to northeast, so
+there are occasionally artifacts like this that result.)  The
+algorithm now goes through the farms and houses around the market in a
+random order.
+
+
+  <LI> Added a context (right-button) menu to the world map; it does not do
+anything yet.
+
+
+  <LI> Fixed a memory corruption bug that occurred whenever (on the world
+map) the view rectangle was dragged off the right side of the map.
+Programmers: never underestimate the power of overloading operator [].
+
+
+  <LI> Completely redid the tree bitmaps.  The trees are now displayed in an
+overhead view, and they change with the season and the age of the
+trees.  Unfortunately the bitmaps are taking up over 150k, so I may
+not keep both the age and the seasonal variation.
+
+
+</UL><P>
+<h3> 15 July 1998 </h3>
+
+
+<UL>
+  <LI> Changed the houses from having populations 16, 32, 48, etc., to 15,
+25, 35, etc.  There is no reason for me to impose computer-based
+numbering (base 2) on users.
+
+
+</UL><P>
+<h3> 10 July 1998 </h3>
+
+
+<UL>
+  <LI> Removed Auto-Build from the menus.
+
+
+  <LI> Fixed some bugs with map creation.
+
+
+  <LI> Improved the information reporting when using the "select" tool.  The
+new format is "[Terrain Type] field:value field:value ..." where a
+field is something like "elevation" or "water".
+
+
+  <LI> Implemented the new food/labor algorithm.  All workers and farmers
+meet at markets, so without a market nearby, nothing will happen (as
+far as economics goes).  The algorithm needs to be tuned a lot, so at
+the moment many of the numbers won't make sense.
+
+
+</UL><P>
+<h3> 9 July 1998 </h3>
+
+
+<UL>
+  <LI> Created new house bitmaps.  Instead of spheres, houses are now
+polygonal and are shaded using 3D lighting models.  Being only five
+pixels across, this probably doesn't help.
+
+
+  <LI> The farm bitmaps now vary with the season.
+
+
+  <LI> An asterisk marks the center of your city.  The city center is used
+by some of the economics calculations.
+
+
+</UL><P>
+<h3> 8 July 1998 </h3>
+
+
+<UL>
+  <LI> Continued to work on a new food/labor algorithm, which uses markets.
+
+
+  <LI> Wrote a "tabbed window" control for the money, population, and speed
+controls; now I'm using that instead of buttons.  The tab and the pane
+"light up" when the mouse moves over the tab button.
+
+
+</UL><P>
+<h3> 5 July 1998 </h3>
+
+
+<UL>
+  <LI> Adjusted the water flow algorithm to make lakes more stable.  When
+lakes form, they are likely to keep their shape for some time.
+Previously, lakes would shift unpredictably until they dried up.
+
+
+  <LI> Changed the highlight on the world map from a dark transparent
+rectangle (which made it harder to see the contents) to a red
+"marching ants" rectangle.  If this is too distracting I may change it
+to a solid non-animated rectangle.
+
+
+</UL><P>
+<h3> 2 July 1998 </h3>
+
+
+<UL>
+  <LI> Began to work on a new food/labor algorithm, which will take markets
+into account.
+
+
+</UL><P>
+<h3> 27 June 1998 </h3>
+
+
+<UL>
+  <LI> Realized that the food/labor (network-flow) algorithms aren't working
+well in the new building system, because it only works when farms and
+houses are next to roads, and it doesn't take markets into account.
+
+
+</UL><P>
+<h3> 26 June 1998 </h3>
+
+
+<UL>
+  <LI> Finished implementing the new building system.
+
+
+</UL><P>
+<h3> 25 June 1998 </h3>
+
+
+<UL>
+  <LI> Began to implement a new building system that includes houses, farms,
+and markets.  Markets tend to be built near city centers; houses tend
+to be built where there is easy access to markets; farms tend to be
+built away from cities.
+
+
+  <LI> Removed Auto-Build mode, since it was incompatible with the new
+building system.
+
+
+</UL><P>
+<h3> 24 June 1998 </h3>
+
+
+<UL>
+  <LI> Removed 'groundwater' from the simulation.  It just wasn't working
+very well.  Also removed the constant rain.
+
+
+  <LI> Changed the water scale (number of water units per altitude unit)
+significantly.
+
+
+  <LI> Changed the water flow algorithm to make more water flow than
+previously.  The hard part about discrete water flow is that real
+water flow is continuous: the old water is moving out of a space at
+the same time that new water is moving in.  The game's water flow is
+discrete: water moves in either before or after water moves out.  I'm
+hoping the new formula will make water flow behave more like
+continuous flow.
+
+
+</UL><P>
+<h3> 23 June 1998 </h3>
+
+
+<UL>
+  <LI> (Internal) Cleaned up a lot of code to reflect changes in the C++ Standard.
+
+
+</UL><P>
+<h3> 20 June 1998 </h3>
+
+
+<UL>
+  <LI> Realized that the style of the list of changes has shifted from "X
+was done" to "Did X".  Oops.
+
+
+</UL><P>
+<h3> 17 June 1998 </h3>
+
+
+<UL>
+  <LI> Added experimental rain that falls on western slopes of mountains.
+The hope is that the rain will fill the water tables and produce
+rivers of some sort.
+
+
+</UL><P>
+<h3> 16 June 1998 </h3>
+
+
+<UL>
+  <LI> Fixed a bug that caused erosion inside trenches.
+
+
+  <LI> Added 'groundwater' to the simulation.  Some of the water that goes
+on the map will be stored in the ground rather than on the surface.
+This water can later reappear at the surface.
+
+
+</UL><P>
+<h3> 18 May 1998 </h3>
+
+
+<UL>
+  <LI> Fixed a bug that could lead to incorrect initialization of menu items
+that act like checkboxes or radio buttons.
+
+
+  <LI> Made the path-finding routines thread-safe.
+
+
+</UL><P>
+<h3> 17 May 1998 </h3>
+
+
+<UL>
+  <LI> The number of blobs that will come out to build things depends on
+your population.  At first, only one builder blob will be created.  At
+every 100,000 in population, you will be able to have one additional
+builder blob.
+
+
+</UL><P>
+<h3> 16 May 1998 </h3>
+
+
+<UL>
+  <LI> The Debug menu lets you view the internal results of the Build Roads
+feature.  White areas are those that ranked higher for roads.
+
+
+</UL><P>
+<h3> 15 May 1998 </h3>
+
+
+<UL>
+  <LI> The new Diety option "Build Roads" will erase existing roads, then
+scan the map for twenty seconds or so, then build new roads where it
+thinks highways should be.  This is an experimental feature that may
+be used in The Silver Kingdoms.
+
+
+</UL><P>
+<h3> 10 May 1998 </h3>
+
+
+<UL>
+  <LI> The popup menu currently starts the train going across the map.
+
+
+</UL><P>
+<h3> 9 May 1998 </h3>
+
+
+<UL>
+  <LI> Added support for popup menus.  These will eventually be attached to
+objects on the map.
+
+
+</UL><P>
+<font size=-1>[<a href="mailto:amitp@cs.stanford.edu">Comments, suggestions, gripes?</a>
+  | <a href="http://www-cs-students.stanford.edu/~amitp/games.html">Back to SimBlob</a>
+  | <a href="http://www-cs-students.stanford.edu/~amitp/">Amit's Home Page</a> ]</font><br>
+<!-- This file was generated by a utility Amit wrote; ask if you are interested -->
+</body>
+</html>
